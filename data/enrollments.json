@@ -1,0 +1,20 @@
+[
+  {
+    "id": "enr_mw8vt6k7_1",
+    "studentId": "user_mw8vt5ajkoz564",
+    "courseId": "basics",
+    "courseTitle": "مبانی آسانسور",
+    "progressPercent": 65,
+    "completed": false,
+    "enrolledAt": "2026-11-09T06:30:03.895Z"
+  },
+  {
+    "id": "enr_mw8vt6k7_2",
+    "studentId": "user_mw8vt5ajkoz564",
+    "courseId": "maintenance",
+    "courseTitle": "سرویس و نگهداری دوره‌ای",
+    "progressPercent": 100,
+    "completed": true,
+    "enrolledAt": "2026-11-09T06:30:03.895Z"
+  }
+]

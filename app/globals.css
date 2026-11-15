@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  background: #0a0a0c;
+  color: #f5f5f7;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #0a0a0c;
+  color: #f5f5f7;
+  font-family: var(--font-vazirmatn), Tahoma, sans-serif;
+}
+
+::selection {
+  background: #d4af37;
+  color: #0a0a0c;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+/* Keep existing Tailwind surface utilities aligned with the dark-gold theme. */
+.bg-white,
+.bg-white\/95,
+.bg-slate-50,
+.bg-slate-100,
+.bg-mist,
+.bg-teal-50 {
+  background-color: #141519 !important;
+}
+
+.text-ink,
+.text-slate-900,
+.text-slate-800 {
+  color: #f5f5f7 !important;
+}
+
+.text-slate-700,
+.text-slate-600,
+.text-slate-500,
+.text-slate-400 {
+  color: #b8b8bd !important;
+}
+
+.border-slate-100,
+.border-slate-200,
+.border-slate-300 {
+  border-color: #2a2d35 !important;
+}
+
+.bg-teal-50 {
+  color: #d4af37 !important;
+}
+
+input,
+select,
+textarea {
+  color-scheme: dark;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  background-color: #141519;
+  color: #f5f5f7;
+  border-color: #2a2d35;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #777981;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  body {
+    background: #fff !important;
+    color: #17130b !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  .invoice-print-sheet,
+  .invoice-print-sheet * {
+    visibility: visible !important;
+  }
+
+  .invoice-print-sheet {
+    position: absolute !important;
+    inset: 0 auto auto 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    border: 1px solid #c3a258 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    color: #17130b !important;
+    box-shadow: none !important;
+  }
+
+  .invoice-print-sheet .text-amber-50,
+  .invoice-print-sheet .text-stone-300,
+  .invoice-print-sheet .text-stone-400,
+  .invoice-print-sheet .text-stone-500 {
+    color: #342916 !important;
+  }
+
+  .invoice-print-sheet .bg-\[\#17140f\],
+  .invoice-print-sheet .bg-\[\#0c0b09\] {
+    background: #fff !important;
+  }
+
+  .invoice-print-sheet .no-print,
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ============================================================
+   CSS چاپ گواهینامه — فقط کارت گواهینامه چاپ می‌شود.
+   ============================================================ */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
+
+  /* همه‌چیز پنهان شود… */
+  body * {
+    visibility: hidden;
+  }
+
+  /* …به جز خود کارت گواهینامه و فرزندانش */
+  .cert-sheet,
+  .cert-sheet * {
+    visibility: visible !important;
+  }
+
+  /* کارت در بالای صفحه، بدون سایه و حاشیه اضافه */
+  .cert-sheet {
+    position: absolute !important;
+    inset: 0 auto auto 0 !important;
+    width: 100% !important;
+    border: 2px solid #c3a258 !important;
+    background: #fff !important;
+    color: #17130b !important;
+    box-shadow: none !important;
+  }
+
+  /* متن روی زمینه سفید خوانا شود */
+  .cert-sheet .text-slate-400,
+  .cert-sheet .text-slate-500 {
+    color: #4b4534 !important;
+  }
+
+  /* دکمه‌ها هرگز در چاپ نیایند */
+  .cert-sheet .no-print,
+  .no-print {
+    display: none !important;
+  }
+}
