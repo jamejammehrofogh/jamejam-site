@@ -49,7 +49,7 @@ export default async function CertificatesPage() {
       courseTitle: enrollment.courseTitle,
     });
     // توکن امنیتی برای لینک QR
-    const token = createCertificateToken(certificate.id);
+    const token = await createCertificateToken(certificate.id);
     const verifyUrl = `${getBaseUrl()}/verify/${certificate.id}?t=${token}`;
     // QR به‌صورت data URL در سرور ساخته می‌شود (SVG نه — PNG ساده‌تر برای چاپ)
     const qrDataUrl = await QRCode.toDataURL(verifyUrl, {

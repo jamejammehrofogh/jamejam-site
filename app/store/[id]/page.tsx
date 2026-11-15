@@ -8,7 +8,6 @@ import { ProductCard } from "@/components/store/product-card";
 import { productCategories, products, getProduct, toman } from "@/lib/store-data";
 import { database } from "@/lib/mock-db";
 
-export const runtime = "edge";
 export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {

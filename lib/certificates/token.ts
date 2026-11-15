@@ -5,10 +5,9 @@
  *
  * - SECRET_KEY فقط از متغیر محیطی CERTIFICATE_SECRET خوانده می‌شود؛
  *   اگر تعریف نشده باشد خطا می‌دهیم (هیچ مقدار پیش‌فرض سخت‌کد‌شده وجود ندارد).
- * - مقایسه با crypto.timingSafeEqual انجام می‌شود تا حمله timing ممکن نباشد.
+ * - مقایسه constant-time دستی انجام می‌شود تا حمله timing ممکن نباشد.
+ *   (نسخه Web Crypto — سازگار با Edge Runtime)
  */
-
-import { createHmac, timingSafeEqual } from "crypto";
 
 /** خواندن کلید از محیط — بدون fallback! */
 function getSecret(): string {
@@ -21,26 +20,45 @@ function getSecret(): string {
   return secret;
 }
 
+/** HMAC-SHA256 با Web Crypto (Edge-compatible) */
+async function hmacSha256Hex(message: string, secret: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    "raw",
+    encoder.encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const signature = await crypto.subtle.sign("HMAC", key, encoder.encode(message));
+  return Array.from(new Uint8Array(signature))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
 /** ساخت توکن HMAC برای یک UUID گواهینامه */
-export function createCertificateToken(certificateUuid: string): string {
-  return createHmac("sha256", getSecret()).update(certificateUuid).digest("hex");
+export async function createCertificateToken(certificateUuid: string): Promise<string> {
+  return hmacSha256Hex(certificateUuid, getSecret());
 }
 
 /**
- * مقایسه امن توکن (constant-time).
+ * مقایسه امن توکن (constant-time دستی روی رشته hex).
  * true یعنی توکن درست است.
  */
-export function verifyCertificateToken(
+export async function verifyCertificateToken(
   certificateUuid: string,
   providedToken: string | null,
-): boolean {
+): Promise<boolean> {
   if (!providedToken) return false;
   try {
-    const expected = Buffer.from(createCertificateToken(certificateUuid), "hex");
-    const provided = Buffer.from(providedToken, "hex");
-    // اگر طول‌ها فرق کند timingSafeEqual خطا می‌دهد → توکن قطعاً نامعتبر است
-    if (expected.length !== provided.length) return false;
-    return timingSafeEqual(expected, provided);
+    const expected = await createCertificateToken(certificateUuid);
+    // مقایسه constant-time: XOR روی همه کاراکترها حتی اگر طول فرق کند
+    const maxLen = Math.max(expected.length, providedToken.length);
+    let diff = expected.length ^ providedToken.length;
+    for (let i = 0; i < maxLen; i++) {
+      diff |= (expected.charCodeAt(i) || 0) ^ (providedToken.charCodeAt(i) || 0);
+    }
+    return diff === 0;
   } catch {
     return false;
   }

@@ -5,8 +5,6 @@
  * اگر قبلاً صادر شده، همان رکورد قبلی برمی‌گردد (idempotent).
  */
 
-import { randomUUID } from "crypto";
-
 import type { CertificateRow } from "./types";
 import {
   findCertificateByStudentAndCourse,
@@ -62,7 +60,7 @@ export async function issueCertificate(
 
   // ۲) ساخت رکورد جدید
   const certificate: CertificateRow = {
-    id: randomUUID(), // UUID استاندارد v4
+    id: crypto.randomUUID(), // UUID استاندارد v4 (Web Crypto — سازگار با Edge)
     readableCode: await generateReadableCode(),
     studentId: input.studentId,
     courseId: input.courseId,

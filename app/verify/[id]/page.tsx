@@ -64,7 +64,7 @@ export default async function VerifyPage({
   }
 
   // --- گام ۲: مقایسه امن توکن با HMAC ---
-  const tokenOk = verifyCertificateToken(id, token ?? null);
+  const tokenOk = await verifyCertificateToken(id, token ?? null);
 
   if (!tokenOk) {
     await logScan({
