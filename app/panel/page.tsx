@@ -6,6 +6,8 @@
  */
 
 import type { Metadata } from "next";
+
+export const runtime = "edge";
 import { redirect } from "next/navigation";
 import { Award, BookOpen, CheckCircle2, GraduationCap, LogOut } from "lucide-react";
 

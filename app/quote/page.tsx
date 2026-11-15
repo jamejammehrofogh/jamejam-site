@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { ClipboardCheck, Phone } from "lucide-react";
+
 import { QuoteWizard } from "@/components/quote/quote-wizard";
+
+export const runtime = "edge";
 
 export const metadata: Metadata = {
   title: "درخواست مشاوره و برآورد",

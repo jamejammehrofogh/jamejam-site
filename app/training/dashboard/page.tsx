@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+
+export const runtime = "edge";
 import {
   Award,
   BookOpen,

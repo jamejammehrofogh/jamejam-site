@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+
+export const runtime = "edge";
 import { BookOpen, GraduationCap, ShieldCheck } from "lucide-react";
 import { SESSION_COOKIE, resolveSession } from "@/lib/training/students";
 import { StudentLoginForm } from "@/components/training/student-login-form";

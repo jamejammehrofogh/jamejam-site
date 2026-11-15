@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+
 import { AddToCartButton } from "@/components/store/add-to-cart-button";
 import { ProductCard } from "@/components/store/product-card";
 import { productCategories, products, getProduct, toman } from "@/lib/store-data";
 import { database } from "@/lib/mock-db";
+
+export const runtime = "edge";
 export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {

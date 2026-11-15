@@ -11,6 +11,8 @@
 
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const runtime = "edge";
 import QRCode from "qrcode";
 import { Award } from "lucide-react";
 

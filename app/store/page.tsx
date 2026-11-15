@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { StoreCatalog } from "@/components/store/store-catalog";
 
+export const runtime = "edge";
+
 export const metadata: Metadata = {
   title: "فروشگاه قطعات آسانسور",
   description: "خرید و استعلام قطعات و تجهیزات آسانسور از فروشگاه جام جم.",

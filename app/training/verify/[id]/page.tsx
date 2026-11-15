@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BadgeCheck, CalendarClock, Fingerprint, GraduationCap, ShieldAlert, Timer } from "lucide-react";
+
 import { trainingDatabase } from "@/lib/training/mock-db";
 import { serializeDate } from "@/lib/training/types";
 import { verificationUrl } from "@/lib/training/helpers";
 import { CertificateQrCard } from "@/components/training/certificate-qr-card";
 import { CertificateStatusBadge } from "@/components/training/certificate-status-badge";
+
+export const runtime = "edge";
 
 export const metadata: Metadata = {
   title: "استعلام اصالت گواهینامه",

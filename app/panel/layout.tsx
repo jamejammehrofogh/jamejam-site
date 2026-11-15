@@ -6,6 +6,8 @@
 
 import { redirect } from "next/navigation";
 
+export const runtime = "edge";
+
 import { getSession } from "@/lib/auth/session";
 
 export default async function PanelLayout({ children }: { children: React.ReactNode }) {
