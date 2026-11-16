@@ -4,19 +4,15 @@
  */
 
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 import { ShieldCheck } from "lucide-react";
 
 import { AdminLoginForm } from "@/components/admin/login-form";
-import { getAdminSession } from "@/lib/admin/session";
 
 export const metadata: Metadata = { title: "ورود ادمین", robots: { index: false } };
 
-export default async function AdminLoginPage() {
-  // ادمینِ لاگین‌شده نیازی به این صفحه ندارد
-  const session = await getAdminSession();
-  if (session) redirect("/admin");
-
+export default function AdminLoginPage() {
+  // خروجی استاتیک: کوکی در زمان build در دسترس نیست؛
+  // هدایت کاربر لاگین‌شده را فرم سمت کلاینت انجام می‌دهد.
   return (
     <main className="flex min-h-screen items-center justify-center bg-dark-bg px-4 text-ink">
       <div className="w-full max-w-sm rounded-3xl border border-dark-border bg-dark-card p-8 shadow-card">

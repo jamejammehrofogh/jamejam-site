@@ -29,14 +29,14 @@ function getBaseUrl(): string {
   return process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 }
 
-export default async function CertificatesPage() {
-  // خروجی استاتیک: کوکی در زمان build در دسترس نیست؛ در build پوسته «وارد شوید» رندر می‌شود
-  let session = null;
-  try {
-    session = await getSession();
-  } catch {
-    session = null;
-  }
+export default function CertificatesPage() {
+  // خروجی استاتیک: کوکی در زمان build در دسترس نیست؛ تشخیص نشست در سمت کلاینت انجام می‌شود
+  return <CertificatesLoginRequired />;
+}
+
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
+async function __unusedStaticShell() {
+  const session: any = null;
   if (!session) return <CertificatesLoginRequired />;
 
   // ۱) دوره‌های تکمیل‌شده دانشجو

@@ -6,12 +6,8 @@ export const metadata: Metadata = {
   description: "خرید و استعلام قطعات و تجهیزات آسانسور از فروشگاه جام جم.",
 };
 
-export default async function StorePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string }>;
-}) {
-  const { q = "" } = await searchParams;
+export default function StorePage() {
+  const q = "";
   return (
     <div className="min-h-[65vh] bg-slate-50">
       <section className="bg-dark-bg px-4 py-12 text-white sm:px-6 lg:px-8">

@@ -19,7 +19,6 @@ import { Award, Ban, CheckCircle2, FileText, Users } from "lucide-react";
 //   completeEnrollmentAction,
 //   revokeCertificateAction,
 // } from "@/lib/admin/actions";
-import { getAdminSession } from "@/lib/admin/session";
 import { getEnrollments, getUsers } from "@/lib/auth/db";
 import { getCertificates } from "@/lib/certificates/db";
 import { formatJalaliDate } from "@/lib/certificates/jalali";
@@ -28,14 +27,6 @@ import { formatJalaliDate } from "@/lib/certificates/jalali";
 export const metadata: Metadata = { title: "داشبورد آموزش", robots: { index: false } };
 
 export default async function AdminTrainingDashboardPage() {
-  // خروجی استاتیک: کوکی و داده‌های حافظه در زمان build در دسترس نیستند
-  let session = null;
-  try {
-    session = await getAdminSession();
-  } catch {
-    session = null;
-  }
-
   // خواندن داده‌ها (در build خالی است)
   const [users, enrollments, certificates] = await Promise.all([
     getUsers(),
@@ -54,7 +45,7 @@ export default async function AdminTrainingDashboardPage() {
           <div>
             <h1 className="text-2xl font-black sm:text-3xl">داشبورد آموزش</h1>
             <p className="mt-1 text-sm text-slate-400">
-              خوش آمدید {session?.username} — مدیریت دانشجوها، ثبت‌نام‌ها و گواهینامه‌ها
+              خوش آمدید — مدیریت دانشجوها، ثبت‌نام‌ها و گواهینامه‌ها
             </p>
           </div>
           {/* خروج ادمین — بعد از اتصال API واقعی فعال می‌شود */}

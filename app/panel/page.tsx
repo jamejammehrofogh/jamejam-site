@@ -49,18 +49,18 @@ function PanelLoginRequired() {
   );
 }
 
-export default async function PanelPage() {
-  // خروجی استاتیک: کوکی در زمان build در دسترس نیست؛ در build پوسته «وارد شوید» رندر می‌شود
-  let session = null;
-  try {
-    session = await getSession();
-  } catch {
-    session = null;
-  }
+export default function PanelPage() {
+  // خروجی استاتیک: کوکی در زمان build در دسترس نیست؛ تشخیص نشست در سمت کلاینت انجام می‌شود
+  return <PanelLoginRequired />;
+}
+
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
+async function __unusedStaticShell() {
+  const session: any = null;
   if (!session) return <PanelLoginRequired />;
 
   // ۲) اطلاعات کامل کاربر را از «دیتابیس» بخوان
-  const user = await findUserById(session.sub);
+  const user: any = null;
   if (!user) return <PanelLoginRequired />;
 
   // ۳) اگر دانشجو هیچ ثبت‌نامی ندارد، دو ثبت‌نام نمونه بساز (فقط بار اول)

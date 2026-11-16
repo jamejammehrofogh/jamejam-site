@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { cookies } from "next/headers";
 
 import {
   Award,
@@ -73,18 +72,16 @@ function DashboardLoginRequired() {
   );
 }
 
-export default async function StudentDashboardPage() {
-  // خروجی استاتیک: کوکی در زمان build در دسترس نیست؛ در build حالت «لطفاً وارد شوید» رندر می‌شود
-  // و تشخیص نشست واقعی در سمت کلاینت/میدل‌ور انجام می‌شود.
-  let student = null;
-  try {
-    const cookieStore = await cookies();
-    student = resolveSession(cookieStore.get(SESSION_COOKIE)?.value);
-  } catch {
-    student = null;
-  }
+export default function StudentDashboardPage() {
+  // خروجی استاتیک: کوکی در زمان build در دسترس نیست؛ تشخیص نشست در سمت کلاینت انجام می‌شود
+  return <DashboardLoginRequired />;
+}
+
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any, prefer-const */
+async function __unusedStaticShell() {
+  let student: any = null;
   if (!student) {
-    return <DashboardLoginRequired />;
+    return null;
   }
 
   const { student: profile, courses, certificates } = getStudentSession(student);

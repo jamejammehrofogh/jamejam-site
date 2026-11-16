@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
 
 import { BookOpen, GraduationCap, ShieldCheck } from "lucide-react";
-import { SESSION_COOKIE, resolveSession } from "@/lib/training/students";
 import { StudentLoginForm } from "@/components/training/student-login-form";
 
 export const metadata: Metadata = {
@@ -14,19 +11,9 @@ export const metadata: Metadata = {
 
 // خروجی استاتیک
 
-export default async function StudentLoginPage() {
+export default function StudentLoginPage() {
   // خروجی استاتیک: کوکی در زمان build در دسترس نیست؛
-  // هدایت کاربر لاگین‌شده به داشبورد را فرم/کد سمت کلاینت انجام می‌دهد.
-  let loggedIn = false;
-  try {
-    const cookieStore = await cookies();
-    loggedIn = resolveSession(cookieStore.get(SESSION_COOKIE)?.value) !== null;
-  } catch {
-    loggedIn = false;
-  }
-  if (loggedIn) {
-    redirect("/training/dashboard");
-  }
+  // هدایت کاربر لاگین‌شده به داشبورد را فرم سمت کلاینت انجام می‌دهد.
 
   return (
     <div
