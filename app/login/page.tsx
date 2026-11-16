@@ -72,42 +72,11 @@ function LoginForm() {
 
     setLoading(true);
     try {
-      const endpoint = mode === "register" ? "/api/auth/register" : "/api/auth/login";
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName: fullName.trim(),
-          phone: toLatinDigits(phone).replace(/[\s-]+/g, ""),
-          password,
-        }),
-      });
-      const data = (await response.json()) as { ok: boolean; message?: string };
-
-      if (!response.ok || !data.ok) {
-        setError(data.message ?? "خطایی رخ داد. دوباره تلاش کنید.");
-        setLoading(false);
-        return;
-      }
-
-      // اگر با ?course=... آمده بودیم، بعد از ورود در همان دوره ثبت‌نام کنیم
-      if (courseParam) {
-        const titles: Record<string, string> = {
-          basics: "مبانی آسانسور",
-          install: "نصب و راه‌اندازی",
-          maintenance: "سرویس و نگهداری دوره‌ای",
-          safety: "ایمنی و بازرسی",
-          repair: "تعمیرات و عیب‌یابی",
-        };
-        await fetch("/api/enroll", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ courseId: courseParam, courseTitle: titles[courseParam] }),
-        });
-      }
-
-      router.replace(nextPath); // برو به پنل (یا مسیر قبلی)
-      router.refresh(); // تا کامپوننت‌های سرور هم نشست جدید را ببینند
+      // نسخه استاتیک: API سمت سرور در دسترس نیست — پیام موقت
+      setError(
+        "ورود/ثبت‌نام در نسخه استاتیک فعلاً غیرفعال است؛ پس از اتصال بک‌اند (Cloudflare Functions) فعال می‌شود.",
+      );
+      setLoading(false);
     } catch {
       setError("ارتباط با سرور برقرار نشد. اینترنت خود را بررسی کنید.");
       setLoading(false);

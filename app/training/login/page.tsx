@@ -3,7 +3,6 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
-export const runtime = "edge";
 import { BookOpen, GraduationCap, ShieldCheck } from "lucide-react";
 import { SESSION_COOKIE, resolveSession } from "@/lib/training/students";
 import { StudentLoginForm } from "@/components/training/student-login-form";
@@ -13,11 +12,19 @@ export const metadata: Metadata = {
   description: "ورود دانشجویان و کارآموزان به داشبورد شخصی آموزش جام جم",
 };
 
-export const dynamic = "force-dynamic";
+// خروجی استاتیک
 
 export default async function StudentLoginPage() {
-  const cookieStore = await cookies();
-  if (resolveSession(cookieStore.get(SESSION_COOKIE)?.value)) {
+  // خروجی استاتیک: کوکی در زمان build در دسترس نیست؛
+  // هدایت کاربر لاگین‌شده به داشبورد را فرم/کد سمت کلاینت انجام می‌دهد.
+  let loggedIn = false;
+  try {
+    const cookieStore = await cookies();
+    loggedIn = resolveSession(cookieStore.get(SESSION_COOKIE)?.value) !== null;
+  } catch {
+    loggedIn = false;
+  }
+  if (loggedIn) {
     redirect("/training/dashboard");
   }
 

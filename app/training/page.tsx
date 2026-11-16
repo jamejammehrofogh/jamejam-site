@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "دوره‌های آموزش تکنسین و کارآموز آسانسور شرکت جام جم و استعلام اصالت گواهینامه‌ها",
 };
 
-export const dynamic = "force-dynamic";
+// خروجی استاتیک — این صفحه به داده‌های سرور وابسته نیست
 
 const CATEGORY_ACCENTS: Record<string, { badge: string; dot: string }> = {
   technician: {

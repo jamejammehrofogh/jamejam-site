@@ -4,16 +4,10 @@
  * اینجا هم نشست چک می‌شود و مهمان به /login هدایت می‌شود.
  */
 
-import { redirect } from "next/navigation";
-
-export const runtime = "edge";
-
 import { getSession } from "@/lib/auth/session";
 
-export default async function PanelLayout({ children }: { children: React.ReactNode }) {
-  const session = await getSession();
-  if (!session) {
-    redirect("/login"); // مهمان → صفحه ورود
-  }
+export default function PanelLayout({ children }: { children: React.ReactNode }) {
+  // خروجی استاتیک: چک نشست در سمت کلاینت/میدل‌ور انجام می‌شود؛
+  // این layout فقط پوسته صفحه را رندر می‌کند.
   return <>{children}</>;
 }

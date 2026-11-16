@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
-export const runtime = "edge";
 import {
   Award,
   BookOpen,
@@ -27,7 +25,11 @@ export const metadata: Metadata = {
   description: "دوره‌ها، پیشرفت آموزشی و گواهینامه‌های شخصی",
 };
 
-export const dynamic = "force-dynamic";
+// خروجی استاتیک
+export const dynamicParams = false;
+export function generateStaticParams() {
+  return [];
+}
 
 const STATUS_LABELS: Record<string, { text: string; className: string }> = {
   active: {
@@ -48,11 +50,41 @@ function faNumber(value: number) {
   return new Intl.NumberFormat("fa-IR").format(value);
 }
 
+function DashboardLoginRequired() {
+  return (
+    <div
+      dir="rtl"
+      className="flex min-h-screen items-center justify-center bg-neutral-950 px-4 text-neutral-100"
+    >
+      <div className="w-full max-w-md rounded-[2rem] border border-white/10 bg-white/[0.04] p-8 text-center shadow-2xl shadow-black/50 backdrop-blur-xl">
+        <ShieldAlert className="mx-auto text-amber-300" size={40} />
+        <h1 className="mt-4 text-xl font-black">برای دیدن داشبورد وارد شوید</h1>
+        <p className="mt-2 text-sm text-neutral-400">
+          نشست فعلی پیدا نشد. لطفاً از صفحه ورود دانشجویان وارد شوید.
+        </p>
+        <Link
+          href="/training/login"
+          className="mt-6 inline-flex items-center justify-center rounded-xl bg-emerald-500 px-6 py-3 text-sm font-black text-neutral-950 transition hover:bg-emerald-400"
+        >
+          ورود به داشبورد
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 export default async function StudentDashboardPage() {
-  const cookieStore = await cookies();
-  const student = resolveSession(cookieStore.get(SESSION_COOKIE)?.value);
+  // خروجی استاتیک: کوکی در زمان build در دسترس نیست؛ در build حالت «لطفاً وارد شوید» رندر می‌شود
+  // و تشخیص نشست واقعی در سمت کلاینت/میدل‌ور انجام می‌شود.
+  let student = null;
+  try {
+    const cookieStore = await cookies();
+    student = resolveSession(cookieStore.get(SESSION_COOKIE)?.value);
+  } catch {
+    student = null;
+  }
   if (!student) {
-    redirect("/training/login");
+    return <DashboardLoginRequired />;
   }
 
   const { student: profile, courses, certificates } = getStudentSession(student);

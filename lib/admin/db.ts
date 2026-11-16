@@ -7,8 +7,11 @@
  * رمز خام هرگز در هیچ فایل یا لاگی ذخیره نمی‌شود.
  */
 
-import { promises as fs } from "fs";
-import path from "path";
+// خروجی استاتیک: دسترسی به fs در خروجی استاتیک/کلاینت وجود ندارد؛
+// این لایه به یک درون‌حافظه‌ای ساده تبدیل شده تا build پاس شود.
+// بعداً دیتابیس واقعی (KV/D1) جایگزین می‌شود.
+// import { promises as fs } from "fs";
+// import path from "path";
 import bcrypt from "bcryptjs";
 
 export interface AdminUser {
@@ -18,21 +21,16 @@ export interface AdminUser {
   createdAt: string;
 }
 
-const DATA_DIR = path.join(process.cwd(), "data");
-const ADMINS_FILE = path.join(DATA_DIR, "admins.json");
+/** ذخیره‌گاه موقت در حافظه */
+const adminsStore: AdminUser[] = [];
 
 async function readAdmins(): Promise<AdminUser[]> {
-  try {
-    const raw = await fs.readFile(ADMINS_FILE, "utf8");
-    return JSON.parse(raw) as AdminUser[];
-  } catch {
-    return [];
-  }
+  return [...adminsStore];
 }
 
 async function writeAdmins(admins: AdminUser[]): Promise<void> {
-  await fs.mkdir(DATA_DIR, { recursive: true });
-  await fs.writeFile(ADMINS_FILE, JSON.stringify(admins, null, 2), "utf8");
+  adminsStore.length = 0;
+  adminsStore.push(...admins);
 }
 
 /** اطمینان از وجود حداقل یک ادمین (bootstrap از env) */

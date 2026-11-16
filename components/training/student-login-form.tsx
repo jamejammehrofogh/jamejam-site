@@ -31,19 +31,9 @@ export function StudentLoginForm() {
     }
     setBusy(true);
     try {
-      const res = await fetch("/api/training/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ identifier: cleaned }),
-      });
-      if (!res.ok) {
-        const { message } = (await res.json().catch(() => ({}))) as { message?: string };
-        setError(message ?? "ورود ناموفق بود. دوباره تلاش کنید.");
-        setBusy(false);
-        return;
-      }
-      router.push("/training/dashboard");
-      router.refresh();
+      // نسخه استاتیک: API آموزش موقتاً غیرفعال است
+      setError("ورود دانشجو در نسخه استاتیک فعلاً غیرفعال است؛ پس از اتصال بک‌اند فعال می‌شود.");
+      setBusy(false);
     } catch {
       setError("خطای شبکه؛ اتصال اینترنت را بررسی کنید.");
       setBusy(false);

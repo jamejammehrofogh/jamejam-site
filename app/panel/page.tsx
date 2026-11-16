@@ -7,8 +7,6 @@
 
 import type { Metadata } from "next";
 
-export const runtime = "edge";
-import { redirect } from "next/navigation";
 import { Award, BookOpen, CheckCircle2, GraduationCap, LogOut } from "lucide-react";
 
 import { LogoutButton } from "@/components/auth/logout-button";
@@ -31,14 +29,39 @@ function formatDate(iso: string): string {
   }
 }
 
+function PanelLoginRequired() {
+  return (
+    <div className="flex min-h-[70vh] items-center justify-center bg-dark-bg px-4 text-ink">
+      <div className="w-full max-w-md rounded-3xl border border-dark-border bg-dark-card p-8 text-center shadow-card">
+        <GraduationCap size={40} className="mx-auto text-gold-primary" aria-hidden />
+        <h1 className="mt-4 text-xl font-black">برای دیدن پنل وارد شوید</h1>
+        <p className="mt-2 text-sm text-slate-400">
+          نشست فعلی پیدا نشد. لطفاً از صفحه ورود وارد حساب خود شوید.
+        </p>
+        <a
+          href="/login"
+          className="mt-6 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-600 px-6 py-3 text-sm font-black text-dark-bg"
+        >
+          ورود به پنل
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export default async function PanelPage() {
-  // ۱) نشست را بخوان (layout هم چک کرده، ولی برای گرفتن نام کاربر لازم است)
-  const session = await getSession();
-  if (!session) redirect("/login");
+  // خروجی استاتیک: کوکی در زمان build در دسترس نیست؛ در build پوسته «وارد شوید» رندر می‌شود
+  let session = null;
+  try {
+    session = await getSession();
+  } catch {
+    session = null;
+  }
+  if (!session) return <PanelLoginRequired />;
 
   // ۲) اطلاعات کامل کاربر را از «دیتابیس» بخوان
   const user = await findUserById(session.sub);
-  if (!user) redirect("/login"); // حساب حذف شده ولی توکن مانده
+  if (!user) return <PanelLoginRequired />;
 
   // ۳) اگر دانشجو هیچ ثبت‌نامی ندارد، دو ثبت‌نام نمونه بساز (فقط بار اول)
   await seedSampleEnrollments(user.id);

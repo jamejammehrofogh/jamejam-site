@@ -13,22 +13,30 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Award, Ban, CheckCircle2, FileText, Users } from "lucide-react";
 
-import {
-  adminLogoutAction,
-  completeEnrollmentAction,
-  revokeCertificateAction,
-} from "@/lib/admin/actions";
+// خروجی استاتیک: Server Action ها موقتاً غیرفعال‌اند؛ اکشن‌ها بعداً از طریق API واقعی وصل می‌شوند.
+// import {
+//   adminLogoutAction,
+//   completeEnrollmentAction,
+//   revokeCertificateAction,
+// } from "@/lib/admin/actions";
 import { getAdminSession } from "@/lib/admin/session";
 import { getEnrollments, getUsers } from "@/lib/auth/db";
 import { getCertificates } from "@/lib/certificates/db";
 import { formatJalaliDate } from "@/lib/certificates/jalali";
 
+// خروجی استاتیک
 export const metadata: Metadata = { title: "داشبورد آموزش", robots: { index: false } };
 
 export default async function AdminTrainingDashboardPage() {
-  const session = await getAdminSession(); // layout هم چک کرده؛ برای نمایش نام لازم است
+  // خروجی استاتیک: کوکی و داده‌های حافظه در زمان build در دسترس نیستند
+  let session = null;
+  try {
+    session = await getAdminSession();
+  } catch {
+    session = null;
+  }
 
-  // خواندن داده‌ها
+  // خواندن داده‌ها (در build خالی است)
   const [users, enrollments, certificates] = await Promise.all([
     getUsers(),
     getEnrollments(),
@@ -49,14 +57,13 @@ export default async function AdminTrainingDashboardPage() {
               خوش آمدید {session?.username} — مدیریت دانشجوها، ثبت‌نام‌ها و گواهینامه‌ها
             </p>
           </div>
-          <form action={adminLogoutAction}>
-            <button
-              type="submit"
-              className="rounded-xl border border-rose-500/40 bg-rose-500/10 px-5 py-2.5 text-sm font-bold text-rose-300 transition hover:bg-rose-500/20"
-            >
-              خروج ادمین
-            </button>
-          </form>
+          {/* خروج ادمین — بعد از اتصال API واقعی فعال می‌شود */}
+          <a
+            href="/admin/login"
+            className="rounded-xl border border-rose-500/40 bg-rose-500/10 px-5 py-2.5 text-sm font-bold text-rose-300"
+          >
+            خروج ادمین
+          </a>
         </header>
 
         {/* ======== دانشجوها ======== */}
@@ -117,16 +124,12 @@ export default async function AdminTrainingDashboardPage() {
                         تکمیل‌شده
                       </span>
                     ) : (
-                      /* اکشن تکمیل دوره → صدور گواهینامه */
-                      <form action={completeEnrollmentAction}>
-                        <input type="hidden" name="enrollmentId" value={row.id} />
-                        <button
-                          type="submit"
-                          className="rounded-lg bg-gradient-to-r from-amber-500 to-yellow-600 px-4 py-1.5 text-xs font-bold text-dark-bg transition hover:brightness-110"
-                        >
-                          تکمیل دوره و صدور مدرک
-                        </button>
-                      </form>
+                      <span
+                        className="rounded-lg bg-gradient-to-r from-amber-500 to-yellow-600 px-4 py-1.5 text-xs font-bold text-dark-bg opacity-50"
+                        title="در نسخه استاتیک غیرفعال است"
+                      >
+                        تکمیل دوره و صدور مدرک
+                      </span>
                     )}
                     {cert && (
                       <Link
@@ -176,24 +179,14 @@ export default async function AdminTrainingDashboardPage() {
                       <span className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-300">
                         فعال
                       </span>
-                      {/* اکشن ابطال با فرم CSRF-امن (Server Action) */}
-                      <form action={revokeCertificateAction} className="flex items-center gap-2">
-                        <input type="hidden" name="certificateId" value={cert.id} />
-                        <input
-                          type="text"
-                          name="reason"
-                          placeholder="دلیل ابطال (اختیاری)"
-                          maxLength={300}
-                          className="w-44 rounded-lg border border-dark-border bg-[#0f1115] px-3 py-1.5 text-xs"
-                        />
-                        <button
-                          type="submit"
-                          className="inline-flex items-center gap-1.5 rounded-lg border border-rose-500/40 bg-rose-500/10 px-4 py-1.5 text-xs font-bold text-rose-300 transition hover:bg-rose-500/20"
-                        >
-                          <Ban size={13} aria-hidden />
-                          ابطال
-                        </button>
-                      </form>
+                      {/* اکشن ابطال — بعد از اتصال API واقعی فعال می‌شود */}
+                      <span
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-rose-500/40 bg-rose-500/10 px-4 py-1.5 text-xs font-bold text-rose-300 opacity-50"
+                        title="در نسخه استاتیک غیرفعال است"
+                      >
+                        <Ban size={13} aria-hidden />
+                        ابطال
+                      </span>
                     </>
                   ) : (
                     <span className="rounded-lg border border-rose-500/40 bg-rose-500/10 px-3 py-1.5 text-xs font-bold text-rose-300">

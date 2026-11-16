@@ -28,6 +28,13 @@ const RESULT_COLORS: Record<string, string> = {
   invalid_token: "text-amber-300",
 };
 
+// خروجی استاتیک: شناسه‌های گواهینامه از قبل شناخته‌شده نیستند؛
+// فعلاً هیچ مسیری از قبل تولید نمی‌شود (گزارش اسکن به نسخه API منتقل می‌شود).
+export const dynamicParams = false;
+export function generateStaticParams() {
+  return [];
+}
+
 export default async function ScanLogPage({
   params,
 }: {

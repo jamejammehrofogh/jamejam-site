@@ -1,10 +1,7 @@
 // صفحه عمومی دوره‌های آموزشی — دکمه ثبت‌نام: لاگین‌ها مستقیم ثبت‌نام می‌شوند، مهمان‌ها به /login می‌روند
 import type { Metadata } from "next";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
-import { getEnrollments, insertEnrollment } from "@/lib/auth/db";
-import { getSession } from "@/lib/auth/session";
 import {
   ArrowLeft,
   BookOpen,
@@ -145,40 +142,11 @@ function priceLabel(value: number | null): string {
 }
 
 /**
- * Server Action ثبت‌نام در دوره:
- *  - اگر کاربر لاگین باشد → یک ردیف در جدول enrollments ساخته می‌شود.
- *  - اگر مهمان باشد → به /login هدایت می‌شود (با ?course= تا بعد از ورود ثبت شود).
+ * خروجی استاتیک: Server Action ها پشتیبانی نمی‌شوند؛
+ * ثبت‌نام فعلاً به صفحه ورود/پنل هدایت می‌کند و بعداً از طریق API واقعی انجام می‌شود.
  */
-async function enrollAction(formData: FormData) {
-  "use server";
-
-  const courseId = String(formData.get("courseId") ?? "");
-  const courseTitle = String(formData.get("courseTitle") ?? "");
-
-  const session = await getSession();
-  if (!session) {
-    // مهمان → صفحه ورود
-    redirect(`/login?course=${encodeURIComponent(courseId)}`);
-  }
-
-  // اگر قبلاً در همین دوره ثبت‌نام کرده، دوباره نساز
-  const enrollments = await getEnrollments();
-  const already = enrollments.some(
-    (row) => row.studentId === session.sub && row.courseId === courseId,
-  );
-  if (!already) {
-    await insertEnrollment({
-      id: `enr_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`,
-      studentId: session.sub,
-      courseId,
-      courseTitle,
-      progressPercent: 0,
-      completed: false,
-      enrolledAt: new Date().toISOString(),
-    });
-  }
-
-  redirect("/panel"); // برو به داشبورد
+function enrollTarget(courseId: string): string {
+  return `/login?course=${encodeURIComponent(courseId)}`;
 }
 
 export default function CoursesPage() {
@@ -256,18 +224,14 @@ export default function CoursesPage() {
                 >
                   {priceLabel(course.priceToman)}
                 </span>
-                <form action={enrollAction}>
-                  <input type="hidden" name="courseId" value={course.slug} />
-                  <input type="hidden" name="courseTitle" value={course.title} />
-                  <button
-                    type="submit"
-                    className="inline-flex items-center gap-1.5 rounded-xl bg-brand px-4 py-2.5 text-sm font-bold text-dark-bg transition hover:bg-brand-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-                    aria-label={`ثبت‌نام در دوره ${course.title}`}
-                  >
-                    ثبت‌نام
-                    <ArrowLeft size={15} aria-hidden />
-                  </button>
-                </form>
+                <Link
+                  href={enrollTarget(course.slug)}
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-brand px-4 py-2.5 text-sm font-bold text-dark-bg transition hover:bg-brand-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                  aria-label={`ثبت‌نام در دوره ${course.title}`}
+                >
+                  ثبت‌نام
+                  <ArrowLeft size={15} aria-hidden />
+                </Link>
               </div>
             </li>
           ))}

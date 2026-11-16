@@ -15,7 +15,8 @@ export function LogoutButton({ children }: { children: ReactNode }) {
   async function handleLogout() {
     setLoading(true);
     try {
-      await fetch("/api/auth/logout", { method: "POST" });
+      // نسخه استاتیک: کوکی را سمت کلاینت پاک می‌کنیم و به صفحه ورود می‌رویم
+      document.cookie = "jj_auth=; Max-Age=0; path=/";
       router.replace("/login"); // برگرد به صفحه ورود
       router.refresh();
     } finally {

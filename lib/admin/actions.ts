@@ -11,11 +11,12 @@
  */
 
 import { revalidatePath } from "next/cache";
-import { promises as fs } from "fs";
-import path from "path";
+// خروجی استاتیک: fs در دسترس نیست؛ این بخش به API/دیتابیس واقعی منتقل می‌شود.
+// import { promises as fs } from "fs";
+// import path from "path";
 
 import { getAdminSession } from "@/lib/admin/session";
-import { getEnrollments, saveEnrollments } from "@/lib/auth/db";
+import { getEnrollments, saveEnrollments, getUsers } from "@/lib/auth/db";
 import { issueCertificate } from "@/lib/certificates/issue";
 import type { CertificateRow } from "@/lib/certificates/types";
 import {
@@ -69,11 +70,10 @@ export async function completeEnrollmentAction(formData: FormData) {
   revalidatePath("/panel");
 }
 
-/** نام دانشجو از فایل users.json — جدا برای وضوح */
+/** نام دانشجو — نسخه استاتیک: از داده‌های حافظه */
 async function getStudentNameById(studentId: string): Promise<string> {
   try {
-    const raw = await fs.readFile(path.join(process.cwd(), "data", "users.json"), "utf8");
-    const users = JSON.parse(raw) as Array<{ id: string; fullName: string }>;
+    const users = await getUsers();
     return users.find((u) => u.id === studentId)?.fullName ?? "دانشجو";
   } catch {
     return "دانشجو";

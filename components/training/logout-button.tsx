@@ -10,7 +10,8 @@ export function LogoutButton() {
 
   async function logout() {
     setBusy(true);
-    await fetch("/api/training/auth/login", { method: "DELETE" }).catch(() => null);
+    // نسخه استاتیک: کوکی را سمت کلاینت پاک می‌کنیم
+    document.cookie = "jj_student_session=; Max-Age=0; path=/";
     router.push("/training/login");
     router.refresh();
   }

@@ -10,9 +10,7 @@
  */
 
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 
-export const runtime = "edge";
 import QRCode from "qrcode";
 import { Award } from "lucide-react";
 
@@ -32,8 +30,14 @@ function getBaseUrl(): string {
 }
 
 export default async function CertificatesPage() {
-  const session = await getSession();
-  if (!session) redirect("/login");
+  // خروجی استاتیک: کوکی در زمان build در دسترس نیست؛ در build پوسته «وارد شوید» رندر می‌شود
+  let session = null;
+  try {
+    session = await getSession();
+  } catch {
+    session = null;
+  }
+  if (!session) return <CertificatesLoginRequired />;
 
   // ۱) دوره‌های تکمیل‌شده دانشجو
   const enrollments = await getEnrollmentsByStudent(session.sub);
@@ -153,6 +157,26 @@ export default async function CertificatesPage() {
             </section>
           ))}
         </div>
+      </div>
+    </main>
+  );
+}
+
+function CertificatesLoginRequired() {
+  return (
+    <main className="flex min-h-[70vh] items-center justify-center bg-dark-bg px-4 text-ink">
+      <div className="w-full max-w-md rounded-3xl border border-dark-border bg-dark-card p-8 text-center shadow-card">
+        <Award size={40} className="mx-auto text-gold-primary" aria-hidden />
+        <h1 className="mt-4 text-xl font-black">برای دیدن گواهینامه‌ها وارد شوید</h1>
+        <p className="mt-2 text-sm text-slate-400">
+          نشست فعلی پیدا نشد. لطفاً از صفحه ورود وارد حساب خود شوید.
+        </p>
+        <a
+          href="/login"
+          className="mt-6 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-600 px-6 py-3 text-sm font-black text-dark-bg"
+        >
+          ورود به پنل
+        </a>
       </div>
     </main>
   );

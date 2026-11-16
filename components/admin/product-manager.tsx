@@ -27,13 +27,8 @@ export function ProductManager() {
 
   async function loadProducts() {
     try {
-      const response = await fetch("/api/products");
-      const result: { products?: Product[]; message?: string } = await response.json();
-      if (!response.ok || !result.products) throw new Error(result.message ?? "دریافت محصولات انجام نشد.");
-      setProducts(result.products);
-      setLoadError("");
-    } catch (error) {
-      setLoadError(error instanceof Error ? error.message : "دریافت محصولات انجام نشد.");
+      // نسخه استاتیک: API موقتاً غیرفعال است — فهرست ثابت محلی نمایش داده می‌شود
+      setLoadError("API محصولات در نسخه استاتیک غیرفعال است؛ فهرست ثابت نمایش داده می‌شود.");
     } finally {
       setLoading(false);
     }
@@ -55,17 +50,8 @@ export function ProductManager() {
       description: String(formData.get("description") ?? ""),
     };
     try {
-      const response = await fetch(editing ? `/api/products/${editing.id}` : "/api/products", {
-        method: editing ? "PATCH" : "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      const result: { message?: string } = await response.json();
-      if (!response.ok) throw new Error(result.message ?? "ذخیره محصول انجام نشد.");
-      await loadProducts();
-      setEditing(null);
-      setIsCreating(false);
-      toast.success(editing ? "محصول ویرایش شد." : "محصول جدید اضافه شد.");
+      // نسخه استاتیک: API موقتاً غیرفعال است
+      toast.error("ذخیره محصول در نسخه استاتیک فعلاً غیرفعال است.");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "ذخیره محصول انجام نشد.");
     } finally {

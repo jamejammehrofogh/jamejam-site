@@ -3,8 +3,6 @@ import { ClipboardCheck, Phone } from "lucide-react";
 
 import { QuoteWizard } from "@/components/quote/quote-wizard";
 
-export const runtime = "edge";
-
 export const metadata: Metadata = {
   title: "درخواست مشاوره و برآورد",
   description: "مشخصات پروژه آسانسور را ثبت کنید تا کارشناسان جام جم با شما تماس بگیرند.",

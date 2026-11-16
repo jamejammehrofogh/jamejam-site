@@ -53,14 +53,11 @@ export function AdminTrainingDashboard() {
   const [editingCertificate, setEditingCertificate] = useState<Certificate | null>(null);
 
   const refresh = useCallback(async () => {
-    const [coursesRes, certsRes, logRes] = await Promise.all([
-      fetch("/api/training/courses"),
-      fetch("/api/training/certificates"),
-      fetch("/api/training/log"),
-    ]);
-    setCourses((await coursesRes.json()).courses ?? []);
-    setCertificates((await certsRes.json()).certificates ?? []);
-    setLog((await logRes.json()).log ?? []);
+    // نسخه استاتیک: API موقتاً غیرفعال است — داده‌های محلی خوانده می‌شوند
+    const { trainingDatabase } = await import("@/lib/training/mock-db");
+    setCourses(trainingDatabase.courses);
+    setCertificates(trainingDatabase.certificates);
+    setLog(trainingDatabase.auditLog ?? []);
   }, []);
 
   useEffect(() => {
@@ -72,50 +69,22 @@ export function AdminTrainingDashboard() {
     [courses],
   );
 
-  async function saveCourse(data: Omit<TrainingCourse, "id" | "createdAt">, id?: string) {
-    const res = await fetch(id ? `/api/training/courses/${id}` : "/api/training/courses", {
-      method: id ? "PATCH" : "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    if (!res.ok) {
-      toast.error("ذخیره دوره ناموفق بود.");
-      return false;
-    }
-    toast.success(id ? "دوره ویرایش شد." : "دوره جدید ایجاد شد.");
-    await refresh();
-    return true;
+  async function saveCourse(_data: Omit<TrainingCourse, "id" | "createdAt">, _id?: string) {
+    // نسخه استاتیک: API موقتاً غیرفعال است
+    toast.error("ذخیره دوره در نسخه استاتیک فعلاً غیرفعال است.");
+    return false;
   }
 
-  async function issueCertificates(students: { name: string; nationalId: string }[], courseId: string, grade: string) {
-    const res = await fetch("/api/training/certificates", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ students, courseId, grade }),
-    });
-    if (!res.ok) {
-      toast.error("صدور گواهینامه ناموفق بود.");
-      return [];
-    }
-    const { certificates: issued } = (await res.json()) as { certificates: Certificate[] };
-    toast.success(`${issued.length} گواهینامه صادر شد.`);
-    await refresh();
-    return issued;
+  async function issueCertificates(_students: { name: string; nationalId: string }[], _courseId: string, _grade: string) {
+    // نسخه استاتیک: API موقتاً غیرفعال است
+    toast.error("صدور گواهینامه در نسخه استاتیک فعلاً غیرفعال است.");
+    return [];
   }
 
-  async function patchCertificate(id: string, body: Record<string, unknown>, successMessage: string) {
-    const res = await fetch(`/api/training/certificates/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    if (!res.ok) {
-      toast.error("عملیات ناموفق بود.");
-      return false;
-    }
-    toast.success(successMessage);
-    await refresh();
-    return true;
+  async function patchCertificate(_id: string, _body: Record<string, unknown>, _successMessage: string) {
+    // نسخه استاتیک: API موقتاً غیرفعال است
+    toast.error("عملیات در نسخه استاتیک فعلاً غیرفعال است.");
+    return false;
   }
 
   return (

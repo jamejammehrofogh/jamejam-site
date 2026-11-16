@@ -13,15 +13,8 @@ export function StoreCatalog({ initialQuery = "" }: { initialQuery?: string }) {
   const [products, setProducts] = useState(initialProducts);
 
   useEffect(() => {
-    fetch("/api/products")
-      .then(async (response) => {
-        const result: { products?: Product[]; message?: string } = await response.json();
-        if (!response.ok || !result.products) throw new Error(result.message ?? "دریافت فهرست محصولات انجام نشد.");
-        setProducts(result.products);
-      })
-      .catch((error: unknown) => {
-        toast.error(error instanceof Error ? error.message : "دریافت فهرست محصولات انجام نشد.");
-      });
+    // نسخه استاتیک: API سمت سرور در دسترس نیست؛ داده‌های ثابت محلی نمایش داده می‌شوند
+    void fetch("/api/products").catch(() => null);
   }, []);
 
   const filtered = useMemo(() => {

@@ -8,10 +8,11 @@ import { ProductCard } from "@/components/store/product-card";
 import { productCategories, products, getProduct, toman } from "@/lib/store-data";
 import { database } from "@/lib/mock-db";
 
-export const dynamic = "force-dynamic";
+// خروجی استاتیک: هر محصول در زمان build رندر می‌شود
+export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return products.map((product) => ({ id: product.id }));
+  return products.map((product) => ({ id: encodeURIComponent(product.id) }));
 }
 
 export async function generateMetadata({

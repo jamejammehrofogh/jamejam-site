@@ -33,19 +33,9 @@ export function AdminLoginForm() {
 
     setLoading(true);
     try {
-      const response = await fetch("/api/admin/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: username.trim(), password }),
-      });
-      const data = (await response.json()) as { ok: boolean; message?: string };
-      if (!response.ok || !data.ok) {
-        setError(data.message ?? "خطایی رخ داد. دوباره تلاش کنید.");
-        setLoading(false);
-        return;
-      }
-      router.replace("/admin");
-      router.refresh();
+      // نسخه استاتیک: API ادمین موقتاً غیرفعال است
+      setError("ورود ادمین در نسخه استاتیک فعلاً غیرفعال است؛ پس از اتصال بک‌اند فعال می‌شود.");
+      setLoading(false);
     } catch {
       setError("ارتباط با سرور برقرار نشد.");
       setLoading(false);

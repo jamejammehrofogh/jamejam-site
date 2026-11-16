@@ -8,15 +8,19 @@ import { verificationUrl } from "@/lib/training/helpers";
 import { CertificateQrCard } from "@/components/training/certificate-qr-card";
 import { CertificateStatusBadge } from "@/components/training/certificate-status-badge";
 
-export const runtime = "edge";
+export const dynamicParams = false;
+export function generateStaticParams() {
+  return trainingDatabase.certificates.map((cert) => ({
+    id: encodeURIComponent(cert.serial),
+  }));
+}
 
 export const metadata: Metadata = {
   title: "استعلام اصالت گواهینامه",
   description: "بررسی اصالت گواهینامه‌های آموزشی شرکت آسانسور جام جم",
 };
 
-export const dynamic = "force-dynamic";
-
+// خروجی استاتیک — این صفحه دیگر در زمان درخواست رندر نمی‌شود
 export default async function VerifyCertificatePage({
   params,
 }: {
