@@ -1,14 +1,17 @@
 
+"use client";
+
 /**
  * صفحه عمومی استعلام گواهینامه — /verify/[id]?t=<token>
  * نسخه استاتیک: اعتبارسنجی HMAC، rate-limit و لاگ اسکن به یک API واقعی
  * (Cloudflare Worker + KV) منتقل می‌شود. فعلاً هیچ شناسه‌ای از قبل تولید نمی‌شود.
  */
 
+import { BadgeCheck, ShieldAlert } from "lucide-react";
+
 export function generateStaticParams() {
   return [];
 }
-import { BadgeCheck, ShieldAlert } from "lucide-react";
 
 export default function VerifyPage() {
   return (
