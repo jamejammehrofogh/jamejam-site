@@ -1,4 +1,3 @@
-"use client";
 
 /**
  * صفحه عمومی استعلام گواهینامه — /verify/[id]?t=<token>
@@ -6,6 +5,9 @@
  * (Cloudflare Worker + KV) منتقل می‌شود. فعلاً هیچ شناسه‌ای از قبل تولید نمی‌شود.
  */
 
+export function generateStaticParams() {
+  return [];
+}
 import { BadgeCheck, ShieldAlert } from "lucide-react";
 
 export default function VerifyPage() {
