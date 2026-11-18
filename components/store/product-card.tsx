@@ -28,7 +28,7 @@ export function ProductCard({ product }: { product: Product }) {
           onError={() => {
             if (imageSrc !== FALLBACK_IMAGE) setImageSrc(FALLBACK_IMAGE);
           }}
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
+          className="w-full h-48 sm:h-56 object-cover transition duration-500 group-hover:scale-[1.04]"
         />
         <span
           className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#171a1e] to-transparent"
@@ -40,13 +40,12 @@ export function ProductCard({ product }: { product: Product }) {
           </span>
         ) : null}
         <span
-          className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[11px] font-bold shadow backdrop-blur ${
-            outOfStock
-              ? "bg-black/70 text-stone-400"
-              : product.stockStatus === "low_stock"
-                ? "bg-amber-400/95 text-stone-950"
-                : "bg-emerald-500/95 text-white"
-          }`}
+          className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[11px] font-bold shadow backdrop-blur ${outOfStock
+            ? "bg-black/70 text-stone-400"
+            : product.stockStatus === "low_stock"
+              ? "bg-amber-400/95 text-stone-950"
+              : "bg-emerald-500/95 text-white"
+            }`}
         >
           {outOfStock ? "ناموجود" : product.stockStatus === "low_stock" ? "موجودی محدود" : "موجود"}
         </span>

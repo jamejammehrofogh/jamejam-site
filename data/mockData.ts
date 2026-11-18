@@ -1,4 +1,4 @@
-export const productCategories = [
+﻿export const productCategories = [
   { id: "all", label: "همه قطعات" },
   { id: "motors", label: "موتور آسانسور" },
   { id: "panels", label: "تابلو فرمان" },
@@ -40,7 +40,7 @@ export const products: Product[] = [
     description: "موتور گیرلس کم‌مصرف، مناسب آسانسورهای مسکونی با ظرفیت ۶ نفر و حرکت نرم.",
     specs: [["ظرفیت", "۶ نفر / ۴۵۰ کیلوگرم"], ["سرعت", "۱ متر بر ثانیه"], ["نوع موتور", "گیرلس، بدون گیربکس"]],
     color: "from-amber-100 to-stone-300",
-    image: "/images/store/motor-gearless.svg",
+    image: "/images/store/motor-gearless.jpg",
   },
   {
     id: "motor-geared-8",
@@ -54,7 +54,7 @@ export const products: Product[] = [
     description: "موتور کششی بادوام با گیربکس کم‌صدا برای پروژه‌های مسکونی و اداری.",
     specs: [["ظرفیت", "۸ نفر / ۶۰۰ کیلوگرم"], ["سرعت", "۱ متر بر ثانیه"], ["نوع موتور", "گیربکس‌دار"]],
     color: "from-zinc-200 to-stone-400",
-    image: "/images/store/motor-geared.svg",
+    image: "/images/store/motor-geared.jpg",
   },
   {
     id: "controller-vvvf",
@@ -68,7 +68,7 @@ export const products: Product[] = [
     description: "تابلو فرمان مجهز به درایو کنترل سرعت برای شروع و توقف نرم و کاهش مصرف انرژی.",
     specs: [["کاربری", "مسکونی و اداری"], ["تعداد توقف", "تا ۱۲ توقف"], ["کنترل سرعت", "VVVF"]],
     color: "from-indigo-100 to-slate-200",
-    image: "/images/store/control-panel-vvvf.svg",
+    image: "/images/store/control-panel-vvvf.jpg",
   },
   {
     id: "controller-hybrid-16",
@@ -82,7 +82,7 @@ export const products: Product[] = [
     description: "کنترلر میکروپروسسوری با قابلیت عیب‌یابی و پشتیبانی از موتورهای دو سرعته و VVVF.",
     specs: [["تعداد توقف", "تا ۱۶ توقف"], ["حالت سرویس", "آتش‌نشان و اضطراری"], ["نمایشگر", "LCD عیب‌یابی"]],
     color: "from-slate-200 to-blue-100",
-    image: "/images/store/control-panel-smart.svg",
+    image: "/images/store/control-panel-smart.jpg",
   },
   {
     id: "cabin-steel",
@@ -96,7 +96,7 @@ export const products: Product[] = [
     description: "کابین با پوشش استیل خش‌دار و کف مقاوم؛ ابعاد و تزئینات قابل انتخاب بر اساس پروژه.",
     specs: [["ظرفیت پیشنهادی", "۶ نفر"], ["پوشش", "استیل خش‌دار"], ["کف", "سنگ یا PVC سفارشی"]],
     color: "from-amber-100 to-stone-300",
-    image: "/images/store/cabin-steel.svg",
+    image: "/images/store/cabin-steel.jpg",
   },
   {
     id: "cabin-modern-8",
@@ -110,7 +110,7 @@ export const products: Product[] = [
     description: "طراحی مدرن با دیواره آینه‌ای، نورپردازی LED و کف‌پوش قابل انتخاب.",
     specs: [["ظرفیت", "۸ نفر"], ["پوشش", "استیل و آینه"], ["روشنایی", "LED کم‌مصرف"]],
     color: "from-stone-200 to-amber-100",
-    image: "/images/store/cabin-mirror.svg",
+    image: "/images/store/cabin-mirror.jpg",
   },
   {
     id: "door-central-80",
@@ -124,7 +124,7 @@ export const products: Product[] = [
     description: "درب تمام‌اتوماتیک مرکزی با عملکرد روان، مناسب ورودی کابین آسانسورهای مسکونی.",
     specs: [["عرض ورودی", "۸۰ سانتی‌متر"], ["نوع بازشو", "مرکزی دو لته"], ["گارانتی", "۱۲ ماه"]],
     color: "from-slate-200 to-zinc-300",
-    image: "/images/store/door-central.svg",
+    image: "/images/store/door-central.jpg",
   },
   {
     id: "door-telescopic-90",
@@ -138,7 +138,7 @@ export const products: Product[] = [
     description: "درب تلسکوپی با بازشوی سریع و صدای کم برای آسانسورهای پرتردد.",
     specs: [["عرض ورودی", "۹۰ سانتی‌متر"], ["نوع بازشو", "تلسکوپی دو لته"], ["پوشش", "الکترواستاتیک"]],
     color: "from-neutral-200 to-stone-300",
-    image: "/images/store/door-telescopic.svg",
+    image: "/images/store/door-telescopic.jpg",
   },
   {
     id: "safety-governor",
@@ -152,7 +152,7 @@ export const products: Product[] = [
     description: "گاورنر برای فعال‌سازی سیستم پاراشوت در شرایط افزایش سرعت بیش از حد مجاز.",
     specs: [["سرعت نامی", "۱ متر بر ثانیه"], ["کاربری", "آسانسور کششی"], ["گواهی", "مطابق مشخصات سازنده"]],
     color: "from-rose-100 to-slate-200",
-    image: "/images/store/safety-governor.svg",
+    image: "/images/store/safety-governor.jpg",
   },
   {
     id: "safety-buffer",
@@ -166,7 +166,7 @@ export const products: Product[] = [
     description: "ضربه‌گیر مستحکم برای جذب انرژی در انتهای مسیر حرکت کابین و وزنه تعادل.",
     specs: [["نوع", "هیدرولیکی"], ["ظرفیت", "مطابق وزن کابین"], ["کاربری", "چاه آسانسور کششی"]],
     color: "from-orange-100 to-stone-300",
-    image: "/images/store/safety-buffer.svg",
+    image: "/images/store/safety-buffer.jpg",
   },
   {
     id: "guide-rail-t70",
@@ -180,7 +180,7 @@ export const products: Product[] = [
     description: "ریل راهنمای آسانسور با کیفیت ساخت مناسب برای نصب و سرویس آسانسورهای متداول.",
     specs: [["مدل", "T70/B"], ["طول شاخه", "۵ متر"], ["کاربرد", "ریل کابین و وزنه"]],
     color: "from-slate-200 to-cyan-100",
-    image: "/images/store/rail-t70.svg",
+    image: "/images/store/rail-t70.jpg",
   },
   {
     id: "wire-rope-8",
@@ -194,7 +194,7 @@ export const products: Product[] = [
     description: "سیم‌بکسل آسانسوری مغز فولادی با بافت یکنواخت، فروش به‌صورت متری.",
     specs: [["قطر", "۸ میلی‌متر"], ["مغزی", "فولادی"], ["واحد فروش", "هر متر"]],
     color: "from-zinc-200 to-slate-300",
-    image: "/images/store/wire-rope.svg",
+    image: "/images/store/wire-rope.jpg",
   },
 ];
 
