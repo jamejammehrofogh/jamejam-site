@@ -187,11 +187,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
                   <ul className="flex-1 divide-y divide-white/10 overflow-y-auto px-5">
                     {lineProducts.map(({ product, quantity }) => (
                       <li key={product.id} className="flex gap-3 py-4">
-                        <div
-                          aria-label={`تصویر ${product.title}`}
-                          role="img"
-                          className={`h-16 w-16 shrink-0 rounded-xl bg-gradient-to-br ${product.color} bg-cover bg-center`}
-                          style={{ backgroundImage: `linear-gradient(0deg,rgba(12,11,9,.25),transparent),url("${product.image}")` }}
+                        <img
+                          src={product.image || "/images/store/placeholder.svg"}
+                          alt={`تصویر ${product.title}`}
+                          width={128}
+                          height={128}
+                          onError={(event) => {
+                            const img = event.currentTarget;
+                            if (!img.src.endsWith("/images/store/placeholder.svg")) img.src = "/images/store/placeholder.svg";
+                          }}
+                          className="h-16 w-16 shrink-0 rounded-xl bg-gradient-to-br object-cover"
                         />
                         <div className="min-w-0 flex-1">
                           <p className="font-bold text-amber-50">{product.title}</p>

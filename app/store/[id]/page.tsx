@@ -5,6 +5,7 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 import { AddToCartButton } from "@/components/store/add-to-cart-button";
 import { ProductCard } from "@/components/store/product-card";
+import { ProductImage } from "@/components/store/product-image";
 import { productCategories, products, getProduct, toman } from "@/lib/store-data";
 import { database } from "@/lib/mock-db";
 
@@ -47,9 +48,9 @@ export default async function ProductPage({
         <div
           role="img"
           aria-label={`تصویر ${product.title}`}
-          className={`relative aspect-square overflow-hidden rounded-3xl bg-gradient-to-br ${product.color} bg-cover bg-center`}
-          style={{ backgroundImage: `linear-gradient(0deg,rgba(12,11,9,.4),transparent 60%),url("${product.image}")` }}
+          className={`relative aspect-square overflow-hidden rounded-3xl bg-gradient-to-br ${product.color}`}
         >
+          <ProductImage src={product.image} alt={product.title} />
           <span className="absolute right-5 top-5 rounded-full border border-white/20 bg-[#17140f]/75 px-4 py-2 text-xs font-bold text-amber-50 backdrop-blur">{category}</span>
         </div>
         <div className="py-2">

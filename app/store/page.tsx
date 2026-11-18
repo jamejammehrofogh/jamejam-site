@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function StorePage() {
   const q = "";
   return (
-    <div className="min-h-[65vh] bg-slate-50">
+    <div className="min-h-[65vh] bg-[#0f1114]">
       <section className="bg-dark-bg px-4 py-12 text-white sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-bold text-gold-primary">فروشگاه آسانسور جام جم</p>
