@@ -42,7 +42,7 @@ export default function HeroSection() {
     >
       {/* Ultra-luxury modern villa architecture background */}
       <img
-        src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=2000&auto=format&fit=crop"
+        src="/images/hero-villa.svg"
         alt=""
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"

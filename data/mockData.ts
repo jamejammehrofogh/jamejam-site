@@ -40,7 +40,7 @@ export const products: Product[] = [
     description: "موتور گیرلس کم‌مصرف، مناسب آسانسورهای مسکونی با ظرفیت ۶ نفر و حرکت نرم.",
     specs: [["ظرفیت", "۶ نفر / ۴۵۰ کیلوگرم"], ["سرعت", "۱ متر بر ثانیه"], ["نوع موتور", "گیرلس، بدون گیربکس"]],
     color: "from-amber-100 to-stone-300",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/store/motor-gearless.svg",
   },
   {
     id: "motor-geared-8",
@@ -54,7 +54,7 @@ export const products: Product[] = [
     description: "موتور کششی بادوام با گیربکس کم‌صدا برای پروژه‌های مسکونی و اداری.",
     specs: [["ظرفیت", "۸ نفر / ۶۰۰ کیلوگرم"], ["سرعت", "۱ متر بر ثانیه"], ["نوع موتور", "گیربکس‌دار"]],
     color: "from-zinc-200 to-stone-400",
-    image: "https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/store/motor-geared.svg",
   },
   {
     id: "controller-vvvf",
@@ -68,7 +68,7 @@ export const products: Product[] = [
     description: "تابلو فرمان مجهز به درایو کنترل سرعت برای شروع و توقف نرم و کاهش مصرف انرژی.",
     specs: [["کاربری", "مسکونی و اداری"], ["تعداد توقف", "تا ۱۲ توقف"], ["کنترل سرعت", "VVVF"]],
     color: "from-indigo-100 to-slate-200",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/store/control-panel-vvvf.svg",
   },
   {
     id: "controller-hybrid-16",
@@ -82,7 +82,7 @@ export const products: Product[] = [
     description: "کنترلر میکروپروسسوری با قابلیت عیب‌یابی و پشتیبانی از موتورهای دو سرعته و VVVF.",
     specs: [["تعداد توقف", "تا ۱۶ توقف"], ["حالت سرویس", "آتش‌نشان و اضطراری"], ["نمایشگر", "LCD عیب‌یابی"]],
     color: "from-slate-200 to-blue-100",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/store/control-panel-smart.svg",
   },
   {
     id: "cabin-steel",
@@ -96,7 +96,7 @@ export const products: Product[] = [
     description: "کابین با پوشش استیل خش‌دار و کف مقاوم؛ ابعاد و تزئینات قابل انتخاب بر اساس پروژه.",
     specs: [["ظرفیت پیشنهادی", "۶ نفر"], ["پوشش", "استیل خش‌دار"], ["کف", "سنگ یا PVC سفارشی"]],
     color: "from-amber-100 to-stone-300",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/store/cabin-steel.svg",
   },
   {
     id: "cabin-modern-8",
@@ -110,7 +110,7 @@ export const products: Product[] = [
     description: "طراحی مدرن با دیواره آینه‌ای، نورپردازی LED و کف‌پوش قابل انتخاب.",
     specs: [["ظرفیت", "۸ نفر"], ["پوشش", "استیل و آینه"], ["روشنایی", "LED کم‌مصرف"]],
     color: "from-stone-200 to-amber-100",
-    image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/store/cabin-mirror.svg",
   },
   {
     id: "door-central-80",
@@ -124,7 +124,7 @@ export const products: Product[] = [
     description: "درب تمام‌اتوماتیک مرکزی با عملکرد روان، مناسب ورودی کابین آسانسورهای مسکونی.",
     specs: [["عرض ورودی", "۸۰ سانتی‌متر"], ["نوع بازشو", "مرکزی دو لته"], ["گارانتی", "۱۲ ماه"]],
     color: "from-slate-200 to-zinc-300",
-    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/store/door-central.svg",
   },
   {
     id: "door-telescopic-90",
@@ -138,7 +138,7 @@ export const products: Product[] = [
     description: "درب تلسکوپی با بازشوی سریع و صدای کم برای آسانسورهای پرتردد.",
     specs: [["عرض ورودی", "۹۰ سانتی‌متر"], ["نوع بازشو", "تلسکوپی دو لته"], ["پوشش", "الکترواستاتیک"]],
     color: "from-neutral-200 to-stone-300",
-    image: "https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/store/door-telescopic.svg",
   },
   {
     id: "safety-governor",
@@ -152,7 +152,7 @@ export const products: Product[] = [
     description: "گاورنر برای فعال‌سازی سیستم پاراشوت در شرایط افزایش سرعت بیش از حد مجاز.",
     specs: [["سرعت نامی", "۱ متر بر ثانیه"], ["کاربری", "آسانسور کششی"], ["گواهی", "مطابق مشخصات سازنده"]],
     color: "from-rose-100 to-slate-200",
-    image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/store/safety-governor.svg",
   },
   {
     id: "safety-buffer",
@@ -166,7 +166,7 @@ export const products: Product[] = [
     description: "ضربه‌گیر مستحکم برای جذب انرژی در انتهای مسیر حرکت کابین و وزنه تعادل.",
     specs: [["نوع", "هیدرولیکی"], ["ظرفیت", "مطابق وزن کابین"], ["کاربری", "چاه آسانسور کششی"]],
     color: "from-orange-100 to-stone-300",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/store/safety-buffer.svg",
   },
   {
     id: "guide-rail-t70",
@@ -180,7 +180,7 @@ export const products: Product[] = [
     description: "ریل راهنمای آسانسور با کیفیت ساخت مناسب برای نصب و سرویس آسانسورهای متداول.",
     specs: [["مدل", "T70/B"], ["طول شاخه", "۵ متر"], ["کاربرد", "ریل کابین و وزنه"]],
     color: "from-slate-200 to-cyan-100",
-    image: "https://images.unsplash.com/photo-1567789884554-0b844b597180?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/store/rail-t70.svg",
   },
   {
     id: "wire-rope-8",
@@ -194,7 +194,7 @@ export const products: Product[] = [
     description: "سیم‌بکسل آسانسوری مغز فولادی با بافت یکنواخت، فروش به‌صورت متری.",
     specs: [["قطر", "۸ میلی‌متر"], ["مغزی", "فولادی"], ["واحد فروش", "هر متر"]],
     color: "from-zinc-200 to-slate-300",
-    image: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/store/wire-rope.svg",
   },
 ];
 
@@ -221,7 +221,7 @@ export const projects: Project[] = [
     type: "آسانسور کششی گیرلس",
     capacity: "۸ نفر",
     stops: "۱۰ توقف",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=85",
+    image: "/images/project-office.svg",
     specs: [["ظرفیت", "۶۰۰ کیلوگرم"], ["سرعت", "۱ متر بر ثانیه"], ["تعداد آسانسور", "۲ دستگاه"], ["مدت اجرا", "۹۰ روز"]],
   },
   {
@@ -232,7 +232,7 @@ export const projects: Project[] = [
     type: "آسانسور پرتردد",
     capacity: "۱۳ نفر",
     stops: "۸ توقف",
-    image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=85",
+    image: "/images/project-lobby.svg",
     specs: [["ظرفیت", "۱۰۰۰ کیلوگرم"], ["سرعت", "۱٫۶ متر بر ثانیه"], ["تعداد آسانسور", "۳ دستگاه"], ["مدت اجرا", "۱۲۰ روز"]],
   },
   {
@@ -243,7 +243,7 @@ export const projects: Project[] = [
     type: "آسانسور باربر",
     capacity: "۱۶۰۰ کیلوگرم",
     stops: "۴ توقف",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1400&q=85",
+    image: "/images/project-install.svg",
     specs: [["ظرفیت", "۱۶۰۰ کیلوگرم"], ["نوع محرکه", "کششی گیربکس‌دار"], ["ابعاد کابین", "۲۰۰ × ۲۵۰ سانتی‌متر"], ["مدت اجرا", "۷۵ روز"]],
   },
   {
@@ -254,7 +254,7 @@ export const projects: Project[] = [
     type: "آسانسور کششی دوگانه",
     capacity: "۱۰ نفر",
     stops: "۱۵ توقف",
-    image: "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1400&q=85",
+    image: "/images/project-hotel.svg",
     specs: [["ظرفیت", "۷۵۰ کیلوگرم"], ["سرعت", "۱٫۶ متر بر ثانیه"], ["تعداد آسانسور", "۲ دستگاه"], ["مدت اجرا", "۱۵۰ روز"]],
   },
   {
@@ -265,7 +265,7 @@ export const projects: Project[] = [
     type: "آسانسور گیرلس",
     capacity: "۸ نفر",
     stops: "۱۲ توقف",
-    image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=85",
+    image: "/images/project-modern.svg",
     specs: [["ظرفیت", "۶۰۰ کیلوگرم"], ["سرعت", "۱٫۶ متر بر ثانیه"], ["کنترل", "VVVF گروهی"], ["مدت اجرا", "۱۱۰ روز"]],
   },
   {
@@ -276,7 +276,7 @@ export const projects: Project[] = [
     type: "آسانسور باربر",
     capacity: "۲۰۰۰ کیلوگرم",
     stops: "۳ توقف",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1400&q=85",
+    image: "/images/project-hydraulic.svg",
     specs: [["ظرفیت", "۲۰۰۰ کیلوگرم"], ["نوع محرکه", "هیدرولیک"], ["ابعاد کابین", "۲۲۰ × ۳۰۰ سانتی‌متر"], ["مدت اجرا", "۶۰ روز"]],
   },
 ];

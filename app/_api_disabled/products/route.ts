@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     stockStatus: result.data.stock === 0 ? "out_of_stock" as const : result.data.stock < 4 ? "low_stock" as const : "in_stock" as const,
     specs: [] as [string, string][],
     color: "from-amber-100 to-stone-300",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=85",
+    image: "/images/service-elevator-1.svg",
   } satisfies Product;
   database.products.unshift(product);
   return Response.json({ product }, { status: 201 });
