@@ -2,8 +2,6 @@ import Link from "next/link";
 import { ArrowUpLeft } from "lucide-react";
 import HeroSection from "@/components/hero-section";
 
-
-
 export default function HomePage() {
   return (
     <>
@@ -23,9 +21,6 @@ export default function HomePage() {
           <ArrowUpLeft size={17} />
         </Link>
       </section>
-
-
-
     </>
   );
 }

@@ -1,120 +1,75 @@
-/* eslint-disable @next/next/no-img-element */
-import React from 'react';
+import Link from "next/link";
+import { GraduationCap, ShoppingCart, Sparkles, Wrench } from "lucide-react";
 
-const SHORTCUTS = [
+const HERO_IMAGE = "/images/hero-bg.jpg";
+
+const CARDS = [
   {
-    href: '/store',
-    icon: '🛒',
-    title: 'فروشگاه آسانسور و قطعات',
-    subtitle: 'Elevator & Parts Store',
+    href: "/store",
+    icon: ShoppingCart,
+    title: "فروشگاه آسانسور و قطعات",
   },
   {
-    href: '/training',
-    icon: '🎓',
-    title: 'بخش آموزشی کارآموزان',
-    subtitle: 'Elevator Apprentice Training',
+    href: "/training",
+    icon: GraduationCap,
+    title: "بخش آموزش کارآموزان",
   },
   {
-    href: '/services',
-    icon: '🛠️',
-    title: 'خدمات تخصصی',
-    subtitle: 'Specialized Services',
-  },
-  {
-    href: '/quote',
-    icon: '📋',
-    title: 'استعلام قیمت و مشاوره',
-    subtitle: 'Price Quote & Consultation',
-  },
-  {
-    href: 'tel:09126975580',
-    icon: '📞',
-    title: 'تماس مستقیم با مدیریت',
-    subtitle: '۰۹۱۲ ۶۹۷ ۵۵۸۰',
+    href: "/services",
+    icon: Wrench,
+    title: "خدمات تخصصی",
   },
 ];
 
 export default function HeroSection() {
   return (
-    <section
-      dir="rtl"
-      className="relative isolate w-full overflow-hidden bg-neutral-950 text-white"
-    >
-      {/* Ultra-luxury modern villa architecture background */}
+    <section dir="rtl" className="relative w-full overflow-hidden">
+      {/* Hero background — full-bleed image, never pushes or overlaps content */}
       <img
-        src="/images/hero-villa.svg"
+        src={HERO_IMAGE}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
-        loading="eager"
+        className="absolute inset-0 w-full h-full object-cover -z-10"
       />
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-black/60" />
 
+      {/* Hero content */}
+      <div className="relative z-10 flex min-h-[90vh] flex-col items-center justify-center pt-24 pb-28 text-center">
+          {/* Green badge */}
+          <span className="inline-flex items-center gap-2 rounded-full bg-emerald-900/80 border border-emerald-500/50 text-emerald-100 px-6 py-2 text-sm">
+            <Sparkles size={16} />
+            شرکت آسانسور و پله برقی جام جم – مدیریت آقای خوزان
+          </span>
 
+          {/* Main headline */}
+          <h1 className="text-5xl md:text-7xl font-black text-white drop-shadow-2xl mt-6">
+            تجربه حرکت در اوج زیبایی
+          </h1>
 
-      <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-4 py-24 text-center sm:px-6 lg:py-32">
-        {/* Badge — dark slate text on a light glass backdrop */}
-        <span className="inline-flex items-center gap-2 rounded-full border border-gray-400/80 bg-white/70 px-5 py-2 text-xs font-semibold tracking-wide text-gray-900 backdrop-blur-md sm:text-sm">
-          <span>✦</span>
-          شرکت آسانسور و پله برقی جام جم — مدیریت آقای خوزان
-        </span>
+          {/* Sub-headline */}
+          <p className="text-lg md:text-2xl text-gray-200 mt-4 max-w-2xl mx-auto leading-9">
+            نصب، تعمیرات و سرویس تخصصی آسانسور و پله برقی باکیفیت‌ترین قطعات و
+            استانداردهای روز، برای ساختمان‌های لوکس شما.
+          </p>
+      </div>
 
-        {/* Main heading */}
-        <h1 className="mt-8 text-4xl font-black leading-[1.4] text-gray-950 sm:text-5xl lg:text-6xl">
-          تجربه حرکت در{' '}
-          <span className="text-gray-950">اوج زیبایی</span>
-        </h1>
-
-        {/* Tagline — placed directly below the heading for maximum contrast */}
-        <p className="mt-5 max-w-xl text-sm font-semibold leading-8 text-gray-900 sm:text-base">
-          نصب، تعمیرات و سرویس تخصصی آسانسور و پله برقی باکیفیت‌ترین قطعات و
-          استانداردهای روز، برای ساختمان‌های لوکس شما.
-        </p>
-
-        {/* Neutral divider */}
-        <span
-          className="mt-6 h-px w-24 bg-gradient-to-l from-transparent via-gray-900/40 to-transparent sm:w-32"
-          aria-hidden="true"
-        />
-
-        {/* Neon shortcut buttons grid — RTL, responsive */}
-        <nav className="mt-12 grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-          {SHORTCUTS.map((item, index) => (
-            <a
-              key={item.href}
-              href={item.href}
-              // On desktop, the last row (2 of 5 cards) sits centered in the middle column
-              className={[
-                'group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-white/25 bg-white/10 p-5 text-right backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-white/50 hover:bg-white/20 hover:shadow-[0_10px_30px_rgba(0,0,0,0.25)] focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent sm:p-6',
-                index === 4 ? 'lg:col-start-2' : '',
-              ]
-                .filter(Boolean)
-                .join(' ')}
+      {/* Glassmorphism overlapping cards */}
+      <div className="relative z-10 mt-[-80px] max-w-6xl mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {CARDS.map((card) => (
+            <Link
+              key={card.href}
+              href={card.href}
+              className="bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center transition hover:bg-slate-900/60 hover:border-yellow-500/50 shadow-xl"
             >
-              <span
-                className="grid h-14 w-14 shrink-0 place-items-center rounded-xl border border-white/20 bg-white/10 text-2xl transition-all duration-300 group-hover:border-white/40 group-hover:bg-white/20"
-                aria-hidden="true"
-              >
-                {item.icon}
+              <span className="bg-yellow-500 text-black p-3 rounded-full mb-4">
+                <card.icon size={26} />
               </span>
-
-              <span className="min-w-0 flex-1">
-                <span className="block text-base font-bold text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.6)] transition-colors duration-300 sm:text-lg">
-                  {item.title}
-                </span>
-                <span className="mt-1 block text-xs text-white/70 transition-colors duration-300 group-hover:text-white/90 sm:text-sm">
-                  {item.subtitle}
-                </span>
-              </span>
-
-              <span
-                className="mr-auto shrink-0 text-white/50 transition-all duration-300 group-hover:-translate-x-1 group-hover:text-white"
-                aria-hidden="true"
-              >
-                ←
-              </span>
-            </a>
+              <span className="text-lg font-bold text-white">{card.title}</span>
+            </Link>
           ))}
-        </nav>
+        </div>
       </div>
     </section>
   );
